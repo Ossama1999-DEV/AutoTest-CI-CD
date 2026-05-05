@@ -4,13 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'gcc main.c -o app'
+                sh 'cd tools && make'
             }
         }
 
         stage('Run') {
             steps {
-                sh './app'
+                sh 'cd tools && ./app'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'tools/app', fingerprint: true
             }
         }
     }
