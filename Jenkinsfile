@@ -16,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('Run') {
+        stage('Run Tests') {
             steps {
-                sh 'cd tools && ./app'
+                sh 'cd tools && make run_test'
             }
         }
 
@@ -26,6 +26,15 @@ pipeline {
             steps {
                 archiveArtifacts artifacts: 'tools/app', fingerprint: true
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'All tests passed ✅'
+        }
+        failure {
+            echo 'Tests failed ❌'
         }
     }
 }
