@@ -12,13 +12,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cd tools && make'
+                sh '''
+                cd tools
+                make clean
+                make
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'cd tools && ./test'
+                sh '''
+                cd tools
+                ./test
+                '''
             }
         }
 
