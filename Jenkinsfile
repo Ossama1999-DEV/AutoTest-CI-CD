@@ -18,7 +18,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'cd tools && make test'
+                sh 'cd tools && ./test'
             }
         }
 
